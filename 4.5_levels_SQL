@@ -1,0 +1,30 @@
+#Level 1: very simple way to see all the information in a dataframe
+
+Select *
+From Data_Customer
+
+#Level 2: A simple way to get specific information without diplicates
+
+Select DISTINCT name, address, status
+From Data_Customer
+
+Level 3: A simple way to get specific information without diplicates while fiding all status that isn't "Current"
+
+Select DISTINCT name, address, status
+From Data_Customer
+Where status != "Current"
+
+Level 4: This joins 2 dataframes from a realtional databse while selecting specific colums from each dataframe
+
+Select DISTINCT dc.name, dc.address, dc.status, od.last_Order
+From Data_Customer as DC
+Where status != "Current"
+Join Orders as Od on DC.id = OD.CustID
+
+Level 4.5: This puts the previous query in a view so this can be used for multiplule queries  
+
+Create View last_Customer as
+Select DISTINCT dc.name, dc.address, dc.status, od.last_Order
+From Data_Customer as DC
+Where status != "Current"
+Join Orders as Od on DC.id = OD.CustID;
